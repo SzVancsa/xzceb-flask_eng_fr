@@ -20,7 +20,7 @@ language_translator = LanguageTranslatorV3(
 language_translator.set_service_url('https://api.eu-de.language-translator.watson.cloud.ibm.com')
 
 
-def english_to_trench(english_text):
+def english_to_french(english_text):
 
     ''' English to French translation '''
 
