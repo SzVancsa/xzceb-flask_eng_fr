@@ -15,12 +15,25 @@ language_translator = LanguageTranslatorV3(
     authenticator=authenticator
 )
 
-language_translator.set_service_url('https://api.eu-de.language-translator.watson.cloud.ibm.com')
+def englishToFrench(englishText):
 
-from ibm_watson import ApiException
-try:
-    
-    
-    
-except ApiException as ex:
-    print "Method failed with status code " + str(ex.code) + ": " + ex.message
+    language_translator.set_service_url('https://api.eu-de.language-translator.watson.cloud.ibm.com')
+
+    frenchtext = language_translator.translate(
+        text = englishText ,
+        model_id = 'en-fr').get_result()
+    print(json.dumps(frenchtext, indent=2, ensure_ascii=False))
+
+    return frenchtext
+
+
+def frenchToEnglish(frenchText):
+
+    language_translator.set_service_url('https://api.eu-de.language-translator.watson.cloud.ibm.com')
+
+    englishText = language_translator.translate(
+        text = frenchText ,
+        model_id = 'en-fr').get_result()
+    print(json.dumps(englishText, indent=2, ensure_ascii=False))
+
+    return englishText
