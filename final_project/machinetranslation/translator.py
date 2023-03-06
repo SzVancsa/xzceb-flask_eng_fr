@@ -15,16 +15,19 @@ language_translator = LanguageTranslatorV3(
     authenticator=authenticator
 )
 
+language_translator.set_service_url('https://api.eu-de.language-translator.watson.cloud.ibm.com')
+
+
 def englishToFrench(englishText):
 
     language_translator.set_service_url('https://api.eu-de.language-translator.watson.cloud.ibm.com')
-
     frenchtext = language_translator.translate(
         text = englishText ,
         model_id = 'en-fr').get_result()
-    print(json.dumps(frenchtext, indent=2, ensure_ascii=False))
+    french = frenchtext['translations']
+    #print(json.dumps(frenchtext, indent=2, ensure_ascii=False))
 
-    return frenchtext
+    return french[0]['translation']
 
 
 def frenchToEnglish(frenchText):
@@ -33,7 +36,8 @@ def frenchToEnglish(frenchText):
 
     englishText = language_translator.translate(
         text = frenchText ,
-        model_id = 'en-fr').get_result()
-    print(json.dumps(englishText, indent=2, ensure_ascii=False))
+        model_id = 'fr-en').get_result()
+    english = englishText['translations']
+    #print(json.dumps(englishText, indent=2, ensure_ascii=False))
 
-    return englishText
+    return english[0]['translation']
