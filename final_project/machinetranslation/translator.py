@@ -1,7 +1,9 @@
-import json
+''' Translates via Watson between English & French '''
+
+#import json
+import os
 from ibm_watson import LanguageTranslatorV3
 from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
-import os
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -18,26 +20,32 @@ language_translator = LanguageTranslatorV3(
 language_translator.set_service_url('https://api.eu-de.language-translator.watson.cloud.ibm.com')
 
 
-def englishToFrench(englishText):
+def english_to_trench(english_text):
 
-    language_translator.set_service_url('https://api.eu-de.language-translator.watson.cloud.ibm.com')
-    frenchtext = language_translator.translate(
-        text = englishText ,
+    ''' English to French translation '''
+
+    language_translator.set_service_url(
+        'https://api.eu-de.language-translator.watson.cloud.ibm.com')
+    french_text = language_translator.translate(
+        text = english_text ,
         model_id = 'en-fr').get_result()
-    french = frenchtext['translations']
-    #print(json.dumps(frenchtext, indent=2, ensure_ascii=False))
+    french = french_text['translations']
+    #print(json.dumps(french_text, indent=2, ensure_ascii=False))
 
     return french[0]['translation']
 
 
-def frenchToEnglish(frenchText):
+def french_to_english(french_text):
 
-    language_translator.set_service_url('https://api.eu-de.language-translator.watson.cloud.ibm.com')
+    """ French to English translation """
 
-    englishText = language_translator.translate(
-        text = frenchText ,
+    language_translator.set_service_url(
+        'https://api.eu-de.language-translator.watson.cloud.ibm.com')
+
+    english_text = language_translator.translate(
+        text = french_text ,
         model_id = 'fr-en').get_result()
-    english = englishText['translations']
-    #print(json.dumps(englishText, indent=2, ensure_ascii=False))
+    english = english_text['translations']
+    #print(json.dumps(english_text, indent=2, ensure_ascii=False))
 
     return english[0]['translation']
